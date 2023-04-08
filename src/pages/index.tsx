@@ -14,7 +14,11 @@ const getExercises = (searchTerm: string) => {
   return filteredExercises;
 };
 
-const SearchBar = () => {
+const SearchBar = ({
+  addExercise,
+}: {
+  addExercise: (exercise: (typeof exercises)[0]) => void;
+}) => {
   const [searchResults, setSearchResults] = useState<typeof exercises>([]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,9 +52,10 @@ const SearchBar = () => {
           </div>
         )}
         {searchResults.map((exercise, index) => (
-          <div
+          <button
             key={index}
             className="flex items-center space-x-2 border border-slate-500"
+            onClick={() => addExercise(exercise)}
           >
             {exercise.name}
             <Image
@@ -59,7 +64,7 @@ const SearchBar = () => {
               width={100}
               height={100}
             />
-          </div>
+          </button>
         ))}
       </div>
     </div>
@@ -67,6 +72,14 @@ const SearchBar = () => {
 };
 
 const Home: NextPage = () => {
+  const [selectedExercises, setSelectedExercises] = useState<typeof exercises>(
+    []
+  );
+
+  const addExercise = (exercise: (typeof exercises)[0]) => {
+    setSelectedExercises([...selectedExercises, exercise]);
+  };
+
   return (
     <>
       <Head>
@@ -75,7 +88,20 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="min-h-screen">
-        <SearchBar />
+        <SearchBar addExercise={addExercise} />
+        <div className="flex flex-col space-y-2">
+          {selectedExercises.map((exercise, index) => (
+            <div key={index} className="flex flex-col items-center space-y-2">
+              <p>{exercise.name}</p>
+              <Image
+                src={`/images/${exercise.id}.svg`}
+                alt={exercise.name}
+                width={100}
+                height={100}
+              />
+            </div>
+          ))}
+        </div>
       </main>
     </>
   );
