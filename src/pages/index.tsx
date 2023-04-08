@@ -2,40 +2,29 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { type ChangeEvent, useState } from "react";
 import debounce from "lodash/debounce";
+import Image from "next/image";
 
-const getExercises = async (searchTerm: string) => {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/todos?_limit=10`
+import { exercises } from "config/exercises";
+
+const getExercises = (searchTerm: string) => {
+  const filteredExercises = exercises.filter((exercise) =>
+    exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const data = (await res.json()) as { title: string }[];
-  return data;
+  return filteredExercises;
 };
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isSearchInputFocused, setIsSearchInputFocused] = useState(false);
-
-  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [searchResults, setSearchResults] = useState<typeof exercises>([]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 0) {
-      setIsSearchInputFocused(true);
-      getExercises(e.target.value)
-        .then((data) => {
-          console.log("data", data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      setSearchResults(["hi", "hello"]);
+      setSearchResults(getExercises(e.target.value));
     } else {
-      setIsSearchInputFocused(false);
       setSearchResults([]);
     }
-    setSearchTerm(e.target.value);
   };
+
   return (
     <div className="border-b px-8 py-4">
       <input
@@ -46,18 +35,30 @@ const SearchBar = () => {
           (e) => handleSearch(e as ChangeEvent<HTMLInputElement>),
           1000
         )}
-        onBlur={() => setIsSearchInputFocused(false)}
       />
 
       <div
         className={
-          "flex max-h-[200px] min-h-[200px] flex-col space-y-2 overflow-y-scroll bg-slate-400" +
-          (isSearchInputFocused ? "" : " hidden")
+          "flex max-h-[200px] min-h-[200px] flex-col space-y-2 overflow-y-scroll border-stone-400 bg-slate-400"
         }
       >
-        {searchResults.map((result, index) => (
-          <div key={index} className="">
-            {result}
+        {searchResults.length === 0 && (
+          <div className="flex items-center justify-center">
+            <p className="text-2xl">No results</p>
+          </div>
+        )}
+        {searchResults.map((exercise, index) => (
+          <div
+            key={index}
+            className="flex items-center space-x-2 border border-slate-500"
+          >
+            {exercise.name}
+            <Image
+              src={`/images/${exercise.id}.svg`}
+              alt={exercise.name}
+              width={100}
+              height={100}
+            />
           </div>
         ))}
       </div>
@@ -75,7 +76,6 @@ const Home: NextPage = () => {
       </Head>
       <main className="min-h-screen">
         <SearchBar />
-        <p>hi</p>
       </main>
     </>
   );
