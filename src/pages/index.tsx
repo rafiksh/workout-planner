@@ -81,6 +81,13 @@ const Home: NextPage = () => {
   );
 
   const addExercise = (exercise: (typeof exercises)[0]) => {
+    if (
+      selectedExercises.some(
+        (selectedExercise) => selectedExercise.id === exercise.id
+      )
+    ) {
+      return;
+    }
     setSelectedExercises([...selectedExercises, exercise]);
   };
 
