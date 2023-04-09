@@ -39,7 +39,6 @@ or
     yarn install
 ```
 
-
 ### Running the Application
 
 To run the application locally, run the following command:
@@ -67,7 +66,6 @@ npm run test
 or
 
 yarn test
-
 
 ## Technologies Used
 
