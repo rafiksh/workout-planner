@@ -1,28 +1,80 @@
-# Create T3 App
+# Workout Planner
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Workout Planner is a web application built with Next.js and TypeScript, designed to help users plan and track their workouts.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- Create and save workout plans
+- Add exercises to workout plans
+- Set goals for workouts and track progress
+- User authentication and authorization
+- Responsive design for mobile and desktop
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Getting Started
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+### Prerequisites
 
-## Learn More
+To run this project locally, you will need to have the following installed on your machine:
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- Node.js (v12 or higher)
+- npm or yarn package manager
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### Installation
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+1. Clone the repository:
 
-## How do I deploy this?
+    git clone <https://github.com/rafiksh/workout-planner.git>
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+2. Install dependencies:
+
+```bash
+    cd workout-planner
+    npm install
+```
+
+or
+
+```bash
+    cd workout-planner
+    yarn install
+```
+
+
+### Running the Application
+
+To run the application locally, run the following command:
+
+```bash
+npm run dev
+```
+
+or
+
+```bash
+yarn dev
+```
+
+arduino
+
+This will start the application on `http://localhost:3000`.
+
+### Testing
+
+To run the tests for the application, run the following command:
+
+npm run test
+
+or
+
+yarn test
+
+
+## Technologies Used
+
+- Next.js
+- TypeScript
+- React
+
+## Contributing
+
+If you are interested in contributing to this project, please fork the repository and submit a pull request. We welcome bug fixes, feature additions, and other contributions.
